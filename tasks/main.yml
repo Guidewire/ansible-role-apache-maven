@@ -1,0 +1,12 @@
+- name: install maven
+  unarchive:
+    src: http://ftp.heanet.ie/mirrors/www.apache.org/dist/maven/maven-{{ maven_version|regex_replace('\.\w+\.\w+$', '') }}/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz
+    dest: /opt
+    remote_src: true
+
+- name: create symlink in /usr/local/bin
+  file:
+    src: /opt/apache-maven-{{ maven_version }}/bin/mvn
+    dest: /usr/local/bin/mvn
+    state: link
+
